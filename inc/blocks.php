@@ -9,20 +9,6 @@
  * Register post types.
  */
 function unitone_search_register_post_types() {
-	register_post_meta(
-		'unitone-search',
-		'unitone_search_related_post_type',
-		array(
-			'show_in_rest'      => true,
-			'type'              => 'string',
-			'single'            => true,
-			'sanitize_callback' => 'sanitize_text_field',
-			'auth_callback'     => function () {
-				return current_user_can( 'manage_options' );
-			},
-		)
-	);
-
 	register_post_type(
 		'unitone-search',
 		array(

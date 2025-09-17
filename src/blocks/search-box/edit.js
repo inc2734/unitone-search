@@ -6,10 +6,9 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@wordpress/core-data';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 export default function ( { attributes, setAttributes, clientId } ) {
@@ -35,29 +34,6 @@ export default function ( { attributes, setAttributes, clientId } ) {
 		);
 	} );
 
-	const currentPostType = useSelect(
-		( select ) => select( 'core/editor' ).getCurrentPostType(),
-		[]
-	);
-	const [ meta, setMeta ] = useEntityProp(
-		'postType',
-		currentPostType,
-		'meta'
-	);
-
-	// Set initial display area to meta.
-	useEffect( () => {
-		if ( ! meta?.unitone_search_related_post_type ) {
-			setMeta( {
-				...meta,
-				unitone_search_related_post_type:
-					! meta?.unitone_search_related_post_type
-						? relatedPostType
-						: undefined,
-			} );
-		}
-	}, [] );
-
 	const blockProps = useBlockProps( {
 		className: 'unitone-search-search-box',
 	} );
@@ -80,20 +56,14 @@ export default function ( { attributes, setAttributes, clientId } ) {
 					<SelectControl
 						__next40pxDefaultSize
 						__nextHasNoMarginBottom
-						label={ __( 'Post Type', 'unitone-search' ) }
-						help={ __(
-							'Custom post archives displaying this search box',
+						label={ __(
+							'Post Types to Search For',
 							'unitone-search'
 						) }
 						value={ relatedPostType || '' }
 						onChange={ ( newAttribute ) => {
 							setAttributes( {
 								relatedPostType: newAttribute,
-							} );
-
-							setMeta( {
-								...meta,
-								unitone_search_related_post_type: newAttribute,
 							} );
 						} }
 						options={ [
