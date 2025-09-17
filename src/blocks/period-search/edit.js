@@ -27,7 +27,7 @@ export default function ( { attributes, setAttributes } ) {
 	}, [ label ] );
 
 	const blockProps = useBlockProps( {
-		className: 'unitone-search-period-search unitone-search-form-control',
+		className: 'unitone-search-period-search unitone-search-fieldset',
 	} );
 
 	let pattern;
@@ -44,7 +44,7 @@ export default function ( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<ToolsPanel label={ __( 'Block settings', 'unitone-search' ) }>
+				<ToolsPanel label={ __( 'Settings', 'unitone-search' ) }>
 					<div style={ { gridColumn: '1 / -1' } }>
 						<span
 							dangerouslySetInnerHTML={ {
@@ -156,10 +156,10 @@ export default function ( { attributes, setAttributes } ) {
 				</ToolsPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				<div className="unitone-search-period-search__header unitone-search-form-control__header">
+			<fieldset { ...blockProps }>
+				<legend className="unitone-search-period-search__header unitone-search-fieldset__header">
 					<RichText
-						tagName="strong"
+						tagName="span"
 						value={ label }
 						onChange={ ( newAttribute ) => {
 							setAttributes( {
@@ -168,34 +168,52 @@ export default function ( { attributes, setAttributes } ) {
 						} }
 						placeholder={ __( 'Label…', 'unitone-search' ) }
 					/>
-				</div>
+				</legend>
 
-				<div className="unitone-search-period-search__content unitone-search-form-control__content">
+				<div className="unitone-search-period-search__content unitone-search-fieldset__content">
 					<div className="unitone-search-period-search__start">
-						<input
-							type={ controlType }
-							className="unitone-search-form-control"
-							name="unitone-search-period-start"
-							pattern={ pattern }
-							min={ min || undefined }
-							disabled
-						/>
+						<label
+							htmlFor="unitone-search-period-start"
+							className="screen-reader-text"
+						>
+							{ __( 'Start date', 'unitone-search' ) }
+						</label>
+						<div className="unitone-search-date-control">
+							<input
+								type={ controlType }
+								className="unitone-search-form-control"
+								id="unitone-search-period-start"
+								name="unitone-search-period-start"
+								pattern={ pattern }
+								min={ min || undefined }
+								disabled
+							/>
+						</div>
 					</div>
 					<div className="unitone-search-period-search__delimiter">
 						{ __( '〜', 'unitone-search' ) }
 					</div>
 					<div className="unitone-search-period-search__end">
-						<input
-							type={ controlType }
-							className="unitone-search-form-control"
-							name="unitone-search-period-end"
-							pattern={ pattern }
-							min={ max || undefined }
-							disabled
-						/>
+						<label
+							htmlFor="unitone-search-period-end"
+							className="screen-reader-text"
+						>
+							{ __( 'End date', 'unitone-search' ) }
+						</label>
+						<div className="unitone-search-date-control">
+							<input
+								type={ controlType }
+								className="unitone-search-form-control"
+								id="unitone-search-period-end"
+								name="unitone-search-period-end"
+								pattern={ pattern }
+								min={ max || undefined }
+								disabled
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</fieldset>
 		</>
 	);
 }

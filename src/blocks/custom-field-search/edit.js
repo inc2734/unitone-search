@@ -119,8 +119,7 @@ export default function ( { attributes, setAttributes, context } ) {
 	}, [ options ] );
 
 	const blockProps = useBlockProps( {
-		className:
-			'unitone-search-custom-field-search unitone-search-form-control',
+		className: 'unitone-search-custom-field-search unitone-search-fieldset',
 	} );
 
 	return (
@@ -440,10 +439,10 @@ export default function ( { attributes, setAttributes, context } ) {
 				</ToolsPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				<div className="unitone-search-custom-field-search__header unitone-search-form-control__header">
+			<fieldset { ...blockProps }>
+				<legend className="unitone-search-custom-field-search__header unitone-search-fieldset__header">
 					<RichText
-						tagName="strong"
+						tagName="span"
 						value={ label }
 						onChange={ ( newAttribute ) => {
 							setAttributes( {
@@ -452,9 +451,9 @@ export default function ( { attributes, setAttributes, context } ) {
 						} }
 						placeholder={ __( 'Label…', 'unitone-search' ) }
 					/>
-				</div>
+				</legend>
 
-				<div className="unitone-search-custom-field-search__content smunitone-searchs-form-control__content">
+				<div className="unitone-search-custom-field-search__content unitone-search-fieldset__content">
 					{ ( 'date' === finalControlType ||
 						'datetime-local' === finalControlType ||
 						'time' === finalControlType ) && (
@@ -474,6 +473,7 @@ export default function ( { attributes, setAttributes, context } ) {
 								'--unitone--item-min-width':
 									itemMinWidth || undefined,
 							} }
+							role="group"
 						>
 							{ finalOptions.map( ( option ) => (
 								<label key={ option.value }>
@@ -500,6 +500,7 @@ export default function ( { attributes, setAttributes, context } ) {
 								'--unitone--item-min-width':
 									itemMinWidth || undefined,
 							} }
+							role="group"
 						>
 							{ finalOptions.map( ( option ) => (
 								<label key={ option.value }>
@@ -521,23 +522,21 @@ export default function ( { attributes, setAttributes, context } ) {
 
 					{ 'select' === finalControlType && (
 						<div className="unitone-search-select">
-							<div className="unitone-search-select">
-								<select
-									className="unitone-search-select__control"
-									disabled
-								>
-									<option value=""></option>
-									{ finalOptions.map( ( option ) => (
-										<option
-											key={ option.value }
-											value={ option.value }
-										>
-											{ option.label }
-										</option>
-									) ) }
-								</select>
-								<span className="unitone-search-select__toggle"></span>
-							</div>
+							<select
+								className="unitone-search-select__control"
+								disabled
+							>
+								<option value=""></option>
+								{ finalOptions.map( ( option ) => (
+									<option
+										key={ option.value }
+										value={ option.value }
+									>
+										{ option.label }
+									</option>
+								) ) }
+							</select>
+							<span className="unitone-search-select__toggle"></span>
 						</div>
 					) }
 
@@ -550,7 +549,7 @@ export default function ( { attributes, setAttributes, context } ) {
 						/>
 					) }
 				</div>
-			</div>
+			</fieldset>
 		</>
 	);
 }

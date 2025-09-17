@@ -6,7 +6,6 @@
 	"name": "unitone-search/search-box",
 	"title": "Search Box",
 	"category": "unitone-search",
-	"allowedBlocks": [ "unitone-search/item" ],
 	"attributes": {
 		"relatedPostType": {
 			"type": "string",

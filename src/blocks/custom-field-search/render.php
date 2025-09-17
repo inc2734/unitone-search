@@ -45,21 +45,22 @@ $http_this  = filter_input( INPUT_GET, 'unitone-search-post-meta', FILTER_DEFAUL
 $http_value = $http_this[ $attributes['key'] ]['value'] ?? false;
 $http_value = 'checks' === $control_type && ! is_array( $http_value ) ? array() : $http_value;
 
-$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-custom-field-search unitone-search-form-control' ) );
+$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-custom-field-search unitone-search-fieldset' ) );
 ?>
 
-<div <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+<fieldset <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php if ( $attributes['label'] ) : ?>
-		<div class="unitone-search-custom-field-search__header unitone-search-form-control__header">
-			<strong><?php echo wp_kses_post( $attributes['label'] ); ?></strong>
-		</div>
+		<legend class="unitone-search-custom-field-search__header unitone-search-fieldset__header">
+			<span><?php echo wp_kses_post( $attributes['label'] ); ?></span>
+		</legend>
 	<?php endif; ?>
 
-	<div class="unitone-search-custom-field-search__content unitone-search-form-control__content">
+	<div class="unitone-search-custom-field-search__content unitone-search-fieldset__content">
 		<?php if ( 'checks' === $control_type ) : ?>
 			<div
 				class="unitone-search-checkboxes unitone-search-is-layout-<?php echo esc_attr( $attributes['flow'] ); ?>"
 				style="<?php echo esc_attr( $attributes['itemMinWidth'] ? '--unitone--item-min-width:' . $attributes['itemMinWidth'] : '' ); ?>"
+				role="group"
 			>
 				<?php foreach ( $options as $option ) : ?>
 					<label>
@@ -84,6 +85,7 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 			<div
 				class="unitone-search-radios sunitone-searchms-is-layout-<?php echo esc_attr( $attributes['flow'] ); ?>"
 				style="<?php echo esc_attr( $attributes['itemMinWidth'] ? '--unitone--item-min-width:' . $attributes['itemMinWidth'] : '' ); ?>"
+				role="group"
 			>
 				<?php foreach ( $options as $option ) : ?>
 					<label>
@@ -106,25 +108,23 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 
 		<?php if ( 'select' === $control_type ) : ?>
 			<div class="unitone-search-select">
-				<div class="unitone-search-select">
-					<select
-						name="unitone-search-post-meta[<?php echo esc_attr( $attributes['key'] ); ?>][value]"
-						class="unitone-search-select__control"
-					>
-						<option value=""></option>
-						<?php foreach ( $options as $option ) : ?>
-							<option
-								value="<?php echo esc_attr( $option['value'] ); ?>"
-								<?php if ( $http_value === $option['value'] ) : ?>
-									selected
-								<?php endif; ?>
-							>
-								<?php echo esc_html( $option['label'] ); ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-					<span class="unitone-search-select__toggle"></span>
-				</div>
+				<select
+					name="unitone-search-post-meta[<?php echo esc_attr( $attributes['key'] ); ?>][value]"
+					class="unitone-search-select__control"
+				>
+					<option value=""></option>
+					<?php foreach ( $options as $option ) : ?>
+						<option
+							value="<?php echo esc_attr( $option['value'] ); ?>"
+							<?php if ( $http_value === $option['value'] ) : ?>
+								selected
+							<?php endif; ?>
+						>
+							<?php echo esc_html( $option['label'] ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+				<span class="unitone-search-select__toggle"></span>
 			</div>
 		<?php endif; ?>
 
@@ -151,4 +151,4 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 		<input type="hidden" name="unitone-search-post-meta[<?php echo esc_attr( $attributes['key'] ); ?>][compare]" value="<?php echo esc_attr( $attributes['compare'] ); ?>" />
 		<input type="hidden" name="unitone-search-post-meta[<?php echo esc_attr( $attributes['key'] ); ?>][type]" value="<?php echo esc_attr( $attributes['type'] ); ?>" />
 	</div>
-</div>
+</fieldset>

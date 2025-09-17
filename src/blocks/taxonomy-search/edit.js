@@ -82,13 +82,13 @@ export default function ( { attributes, setAttributes, context } ) {
 	}, [ label, taxonomy, taxonomiesWithRelatedPostType ] );
 
 	const blockProps = useBlockProps( {
-		className: 'unitone-search-taxonomy-search unitone-search-form-control',
+		className: 'unitone-search-taxonomy-search unitone-search-fieldset',
 	} );
 
 	return (
 		<>
 			<InspectorControls>
-				<ToolsPanel label={ __( 'Block settings', 'unitone-search' ) }>
+				<ToolsPanel label={ __( 'Settings', 'unitone-search' ) }>
 					<ToolsPanelItem
 						hasValue={ () =>
 							controlType !==
@@ -252,7 +252,7 @@ export default function ( { attributes, setAttributes, context } ) {
 				</ToolsPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
+			<fieldset { ...blockProps }>
 				{ ( () => {
 					const isAvailable = !! taxonomy;
 					const isLoading =
@@ -274,9 +274,9 @@ export default function ( { attributes, setAttributes, context } ) {
 
 					return (
 						<>
-							<div className="unitone-search-taxonomy-search__header unitone-search-form-control__header">
+							<legend className="unitone-search-taxonomy-search__header unitone-search-fieldset__header">
 								<RichText
-									tagName="strong"
+									tagName="span"
 									value={ label }
 									onChange={ ( newAttribute ) => {
 										setAttributes( {
@@ -288,9 +288,9 @@ export default function ( { attributes, setAttributes, context } ) {
 										'unitone-search'
 									) }
 								/>
-							</div>
+							</legend>
 
-							<div className="unitone-search-taxonomy-search__content unitone-search-form-control__content">
+							<div className="unitone-search-taxonomy-search__content unitone-search-fieldset__content">
 								{ 'checks' === controlType && (
 									<div
 										className={ `unitone-search-checkboxes unitone-search-is-layout-${ flow }` }
@@ -298,6 +298,7 @@ export default function ( { attributes, setAttributes, context } ) {
 											'--unitone--item-min-width':
 												itemMinWidth || undefined,
 										} }
+										role="group"
 									>
 										{ terms.map( ( term ) => (
 											<label key={ term.slug }>
@@ -324,6 +325,7 @@ export default function ( { attributes, setAttributes, context } ) {
 											'--unitone--item-min-width':
 												itemMinWidth || undefined,
 										} }
+										role="group"
 									>
 										{ terms.map( ( term ) => (
 											<label key={ term.slug }>
@@ -345,30 +347,28 @@ export default function ( { attributes, setAttributes, context } ) {
 
 								{ 'select' === controlType && (
 									<div className="unitone-search-select">
-										<div className="unitone-search-select">
-											<select
-												className="unitone-search-select__control"
-												disabled
-											>
-												<option value=""></option>
-												{ terms.map( ( term ) => (
-													<option
-														key={ term.slug }
-														value={ term.slug }
-													>
-														{ term.name }
-													</option>
-												) ) }
-											</select>
-											<span className="unitone-search-select__toggle"></span>
-										</div>
+										<select
+											className="unitone-search-select__control"
+											disabled
+										>
+											<option value=""></option>
+											{ terms.map( ( term ) => (
+												<option
+													key={ term.slug }
+													value={ term.slug }
+												>
+													{ term.name }
+												</option>
+											) ) }
+										</select>
+										<span className="unitone-search-select__toggle"></span>
 									</div>
 								) }
 							</div>
 						</>
 					);
 				} )() }
-			</div>
+			</fieldset>
 		</>
 	);
 }

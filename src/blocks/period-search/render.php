@@ -27,22 +27,24 @@ $max = $attributes['max'] && preg_match( '|^' . $pattern . '$|', $attributes['ma
 	? $attributes['max']
 	: false;
 
-$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-period-search unitone-search-form-control' ) );
+$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-period-search unitone-search-fieldset' ) );
 ?>
 
-<div <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+<fieldset <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php if ( $attributes['label'] ) : ?>
-		<div class="unitone-search-period-search__header unitone-search-form-control__header">
-			<strong><?php echo wp_kses_post( $attributes['label'] ); ?></strong>
-		</div>
+		<legend class="unitone-search-period-search__header unitone-search-fieldset__header">
+			<span><?php echo wp_kses_post( $attributes['label'] ); ?></span>
+		</legend>
 	<?php endif; ?>
 
-	<div class="unitone-search-period-search__content unitone-search-form-control__content">
+	<div class="unitone-search-period-search__content unitone-search-fieldset__content">
 		<div class="unitone-search-period-search__start">
+			<label for="unitone-search-period-start" class="screen-reader-text"><?php esc_html_e( 'Start date', 'unitone-search' ); ?></label>
 			<div class="unitone-search-date-control">
 				<input
 					type="<?php echo esc_attr( $attributes['controlType'] ); ?>"
 					class="unitone-search-form-control"
+					id="unitone-search-period-start"
 					name="unitone-search-period-start"
 					pattern="<?php echo esc_attr( $pattern ); ?>"
 					value="<?php echo esc_attr( $http_start ); ?>"
@@ -56,10 +58,12 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 			<?php esc_html_e( '〜', 'unitone-search' ); ?>
 		</div>
 		<div class="unitone-search-period-search__end">
+			<label for="unitone-search-period-end" class="screen-reader-text"><?php esc_html_e( 'End date', 'unitone-search' ); ?></label>
 			<div class="unitone-search-date-control">
 				<input
 					type="<?php echo esc_attr( $attributes['controlType'] ); ?>"
 					class="unitone-search-form-control"
+					id="unitone-search-period-end"
 					name="unitone-search-period-end"
 					pattern="<?php echo esc_attr( $pattern ); ?>"
 					value="<?php echo esc_attr( $http_end ); ?>"
@@ -70,4 +74,4 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 			</div>
 		</div>
 	</div>
-</div>
+</fieldset>

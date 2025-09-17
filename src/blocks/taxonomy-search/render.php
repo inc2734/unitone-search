@@ -79,21 +79,22 @@ $http_this = filter_input( INPUT_GET, 'unitone-search-taxonomies', FILTER_DEFAUL
 $http_this = $http_this[ $wp_taxonomy->name ] ?? array();
 $http_this = is_array( $http_this ) ? $http_this : array();
 
-$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-taxonomy-search unitone-search-form-control' ) );
+$block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search-taxonomy-search unitone-search-fieldset' ) );
 ?>
 
-<div <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+<fieldset <?php echo $block_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php if ( $attributes['label'] ) : ?>
-		<div class="unitone-search-taxonomy-search__header unitone-search-form-control__header">
-			<strong><?php echo wp_kses_post( $attributes['label'] ); ?></strong>
-		</div>
+		<legend class="unitone-search-taxonomy-search__header unitone-search-fieldset__header">
+			<span><?php echo wp_kses_post( $attributes['label'] ); ?></span>
+		</legend>
 	<?php endif; ?>
 
-	<div class="unitone-search-taxonomy-search__content unitone-search-form-control__content">
+	<div class="unitone-search-taxonomy-search__content unitone-search-fieldset__content">
 		<?php if ( 'checks' === $attributes['controlType'] ) : ?>
 			<div
 				class="unitone-search-checkboxes unitone-search-is-layout-<?php echo esc_attr( $attributes['flow'] ); ?>"
 				style="<?php echo esc_attr( $attributes['itemMinWidth'] ? '--unitone--item-min-width:' . $attributes['itemMinWidth'] : '' ); ?>"
+				role="group"
 			>
 				<?php foreach ( $terms as $_term ) : ?>
 					<label>
@@ -118,6 +119,7 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 			<div
 				class="unitone-search-radios unitone-search-is-layout-<?php echo esc_attr( $attributes['flow'] ); ?>"
 				style="<?php echo esc_attr( $attributes['itemMinWidth'] ? '--unitone--item-min-width:' . $attributes['itemMinWidth'] : '' ); ?>"
+				role="group"
 			>
 				<?php foreach ( $terms as $_term ) : ?>
 					<label>
@@ -140,26 +142,24 @@ $block_wrapper = get_block_wrapper_attributes( array( 'class' => 'unitone-search
 
 		<?php if ( 'select' === $attributes['controlType'] ) : ?>
 			<div class="unitone-search-select">
-				<div class="unitone-search-select">
-					<select
-						name="unitone-search-taxonomies[<?php echo esc_attr( $wp_taxonomy->name ); ?>][]"
-						class="unitone-search-select__control"
-					>
-						<option value=""></option>
-						<?php foreach ( $terms as $_term ) : ?>
-							<option
-								value="<?php echo esc_attr( $_term->slug ); ?>"
-								<?php if ( $http_this && in_array( $_term->slug, $http_this, true ) ) : ?>
-									selected
-								<?php endif; ?>
-							>
-								<?php echo esc_html( str_repeat( '&#160;&#160;', $_term->depth ?? 0 ) . ' ' . $_term->name ); ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-					<span class="unitone-search-select__toggle"></span>
-				</div>
+				<select
+					name="unitone-search-taxonomies[<?php echo esc_attr( $wp_taxonomy->name ); ?>][]"
+					class="unitone-search-select__control"
+				>
+					<option value=""></option>
+					<?php foreach ( $terms as $_term ) : ?>
+						<option
+							value="<?php echo esc_attr( $_term->slug ); ?>"
+							<?php if ( $http_this && in_array( $_term->slug, $http_this, true ) ) : ?>
+								selected
+							<?php endif; ?>
+						>
+							<?php echo esc_html( str_repeat( '&#160;&#160;', $_term->depth ?? 0 ) . ' ' . $_term->name ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+				<span class="unitone-search-select__toggle"></span>
 			</div>
 		<?php endif; ?>
 	</div>
-</div>
+</fieldset>

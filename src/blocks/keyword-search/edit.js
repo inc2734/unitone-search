@@ -26,13 +26,13 @@ export default function ( { attributes, setAttributes } ) {
 	}, [ label ] );
 
 	const blockProps = useBlockProps( {
-		className: 'unitone-search-keyword-search unitone-search-form-control',
+		className: 'unitone-search-keyword-search unitone-search-fieldset',
 	} );
 
 	return (
 		<>
 			<InspectorControls>
-				<ToolsPanel label={ __( 'Block settings', 'unitone-search' ) }>
+				<ToolsPanel label={ __( 'Settings', 'unitone-search' ) }>
 					<ToolsPanelItem
 						hasValue={ () =>
 							placeholder !==
@@ -60,30 +60,33 @@ export default function ( { attributes, setAttributes } ) {
 				</ToolsPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				<div className="unitone-search-keyword-search__header unitone-search-form-control__header">
-					<RichText
-						tagName="strong"
-						value={ label }
-						onChange={ ( newAttribute ) => {
-							setAttributes( {
-								label: newAttribute,
-							} );
-						} }
-						placeholder={ __( 'Label…', 'unitone-search' ) }
-					/>
+			<fieldset { ...blockProps }>
+				<div className="unitone-search-keyword-search__header unitone-search-fieldset__header">
+					<label htmlFor="unitone-search-keyword-search-s">
+						<RichText
+							tagName="span"
+							value={ label }
+							onChange={ ( newAttribute ) => {
+								setAttributes( {
+									label: newAttribute,
+								} );
+							} }
+							placeholder={ __( 'Label…', 'unitone-search' ) }
+						/>
+					</label>
 				</div>
 
-				<div className="unitone-search-keyword-search__content unitone-search-form-control__content">
+				<div className="unitone-search-keyword-search__content unitone-search-fieldset__content">
 					<input
 						type="text"
 						className="unitone-search-form-control"
+						id="unitone-search-keyword-search-s"
 						name="s"
 						placeholder={ placeholder }
 						disabled
 					/>
 				</div>
-			</div>
+			</fieldset>
 		</>
 	);
 }

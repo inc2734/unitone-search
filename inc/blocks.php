@@ -50,8 +50,8 @@ function unitone_search_register_post_types() {
 								'width' => '1px',
 							),
 						),
-						'borderColor'     => 'var(--wp--preset--color--unitone-light-gray)',
-						'backgroundColor' => 'var(--wp--preset--color--unitone-bright-gray)',
+						'borderColor'     => 'unitone-light-gray',
+						'backgroundColor' => 'unitone-pale-gray',
 						'lock'            => array(
 							'move'   => true,
 							'remove' => true,
@@ -59,36 +59,36 @@ function unitone_search_register_post_types() {
 					),
 					array(
 						array(
-							'unitone/stack',
+							'unitone/flex',
 							array(),
 							array(
 								array(
 									'unitone-search/keyword-search',
+									array(
+										'unitone' => array(
+											'flexGrow'  => '1',
+											'flexBasis' => '100%',
+										),
+									),
 								),
-							),
-						),
-						array(
-							'unitone/stack',
-							array(),
-							array(
 								array(
 									'unitone-search/taxonomy-search',
 									array(
 										'postType' => 'post',
 										'taxonomy' => 'category',
+										'unitone'  => array(
+											'flexGrow' => '1',
+										),
 									),
 								),
-							),
-						),
-						array(
-							'unitone/stack',
-							array(),
-							array(
 								array(
 									'unitone-search/taxonomy-search',
 									array(
 										'postType' => 'post',
 										'taxonomy' => 'post_tag',
+										'unitone'  => array(
+											'flexGrow' => '1',
+										),
 									),
 								),
 							),
