@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "unitone-search",
+	"name": "unitone-search/taxonomy-search",
+	"title": "Taxonomy Search",
+	"category": "unitone-search",
+	"ancestor": [ "unitone-search/search-box" ],
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": null
+		},
+		"controlType": {
+			"type": "string",
+			"default": "checks"
+		},
+		"postType": {
+			"type": "string",
+			"default": ""
+		},
+		"taxonomy": {
+			"type": "string",
+			"default": ""
+		},
+		"flow": {
+			"type": "string",
+			"default": "inline"
+		},
+		"itemMinWidth": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"usesContext": [ "unitone-search/relatedPostType" ],
+	"selectors": {
+		"root": ".unitone-search-taxonomy-search"
+	},
+	"supports": {
+		"className": false,
+		"anchor": true,
+		"html": false
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php"
+}

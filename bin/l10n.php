@@ -1,7 +1,7 @@
 <?php
 /**
  * @package unitone-search
- * @author inc2734
+ * @author Takashi Kitajima
  * @license GPL-2.0+
  */
 

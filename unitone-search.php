@@ -13,16 +13,25 @@
  * Text Domain: unitone-search
  *
  * @package unitone-search
- * @author inc2734
+ * @author Takashi Kitajima
  * @license GPL-2.0+
  */
 
 namespace UnitoneSearch;
 
-use Unitone\App\DynamicBlock;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 define( 'UNITONE_SEARCH_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'UNITONE_SEARCH_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+
+$autoloader_path = UNITONE_SEARCH_PATH . '/vendor/autoload.php';
+if ( file_exists( $autoloader_path ) ) {
+	require_once $autoloader_path;
+} else {
+	exit;
+}
 
 class Bootstrap {
 
@@ -58,8 +67,109 @@ class Bootstrap {
 
 		require UNITONE_SEARCH_PATH . '/inc/i18n.php';
 		require UNITONE_SEARCH_PATH . '/inc/blocks.php';
+
+		add_action( 'render_block_core/query', array( $this, '_display_search_box' ) );
+		add_action( 'template_redirect', array( $this, '_template_redirect' ) );
+
+		new App\Rest();
+		new App\Query();
+	}
+
+	/**
+	 * Display search box.
+	 *
+	 * @param string $block_content The block content.
+	 * @return string
+	 */
+	public function _display_search_box( $block_content ) {
+		global $wp_query;
+
+		$post_type = App\Query::is_archive( $wp_query );
+		$is_search = App\Query::is_search( $wp_query );
+		if ( ! $post_type && ! $is_search ) {
+			return $block_content;
+		}
+
+		$the_query = new \WP_Query(
+			array(
+				'post_type'        => 'unitone-search',
+				'posts_per_page'   => 1,
+				'suppress_filters' => false,
+				'no_found_rows'    => true,
+				'meta_query'       => array(
+					array(
+						'key'     => 'unitone_search_related_post_type',
+						'value'   => $post_type ? $post_type : 'post',
+						'compare' => 'IN',
+					),
+				),
+			)
+		);
+
+		if ( ! $the_query->have_posts() ) {
+			return $block_content;
+		}
+
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			ob_start();
+			the_content();
+			$search_box = ob_get_clean();
+		}
+		wp_reset_postdata();
+
+		return $search_box . $block_content;
+	}
+
+	/**
+	 * If the paging destination does not exist, redirect to the first page.
+	 */
+	public function _template_redirect() {
+		global $wp_query;
+
+		if ( is_null( filter_input( INPUT_GET, 'unitone-search' ) ) ) {
+			return;
+		}
+
+		if ( is_404() && 1 < get_query_var( 'paged' ) ) {
+			$request_uri = wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			if ( $request_uri ) {
+				$sub_directory = wp_parse_url( $home_url, PHP_URL_PATH ) ?? '';
+				$absolute_path = preg_replace( '|^' . preg_quote( $sub_directory ) . '|', '', $request_uri );
+				$redirect      = untrailingslashit( $home_url ) . $absolute_path;
+				$redirect      = preg_replace( '|/page/\d+|', '', $redirect );
+				$redirect      = preg_replace( '|paged=\d+|', '', $redirect );
+
+				wp_safe_redirect( $redirect );
+				exit;
+			}
+		}
 	}
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
 new \UnitoneSearch\Bootstrap();
+
+/**
+ * Uninstall.
+ */
+function unitone_search_uninstall() {
+	$posts = get_posts(
+		array(
+			'post_type'      => 'unitone-search',
+			'posts_per_page' => -1,
+		)
+	);
+
+	foreach ( $posts as $post ) {
+		wp_delete_post( $post->ID, true );
+	}
+}
+
+/**
+ * Register uninstall hook.
+ */
+function unitone_search_activate() {
+	register_uninstall_hook( __FILE__, '\UnitoneSearch\unitone_search_uninstall' );
+}
+register_activation_hook( __FILE__, '\UnitoneSearch\unitone_search_activate' );
+

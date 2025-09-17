@@ -9,6 +9,7 @@
 	"devDependencies": {
 		"@inc2734/contents-outline": "^0.1.7",
 		"@wordpress/env": "^10.30.0",
+		"@wordpress/icons": "^10.30.0",
 		"@wordpress/scripts": "^30.23.0",
 		"autoprefixer": "^10.4.21",
 		"classnames": "^2.5.1",

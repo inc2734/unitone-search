@@ -1,0 +1,59 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "unitone-search",
+	"name": "unitone-search/custom-field-search",
+	"title": "Custom Field Search",
+	"category": "unitone-search",
+	"ancestor": [ "unitone-search/search-box" ],
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": null
+		},
+		"key": {
+			"type": "string",
+			"default": ""
+		},
+		"postType": {
+			"type": "string",
+			"default": ""
+		},
+		"controlType": {
+			"type": "string",
+			"default": "text"
+		},
+		"options": {
+			"type": "string",
+			"default": ""
+		},
+		"compare": {
+			"type": "string",
+			"default": "="
+		},
+		"type": {
+			"type": "string",
+			"default": "char"
+		},
+		"flow": {
+			"type": "string",
+			"default": "inline"
+		},
+		"itemMinWidth": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"usesContext": [ "unitone-search/relatedPostType" ],
+	"selectors": {
+		"root": ".unitone-search-custom-field-search"
+	},
+	"supports": {
+		"className": false,
+		"anchor": true,
+		"html": false
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

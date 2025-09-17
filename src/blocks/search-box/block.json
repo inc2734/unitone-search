@@ -1,0 +1,58 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"version": "1.0.1",
+	"textdomain": "unitone-search",
+	"name": "unitone-search/search-box",
+	"title": "Search Box",
+	"category": "unitone-search",
+	"allowedBlocks": [ "unitone-search/item" ],
+	"attributes": {
+		"relatedPostType": {
+			"type": "string",
+			"default": "post"
+		},
+		"templateLock": {
+			"type": [ "string", "boolean" ],
+			"enum": [ "all", "insert", "contentOnly", false ]
+		}
+	},
+	"providesContext": {
+		"unitone-search/relatedPostType": "relatedPostType"
+	},
+	"selectors": {
+		"root": ".unitone-search-search-box"
+	},
+	"supports": {
+		"className": false,
+		"inserter": false,
+		"multiple": false,
+		"reusable": false,
+		"color": {
+			"background": true,
+			"color": true,
+			"gradients": true,
+			"link": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"color": true,
+				"radius": true,
+				"style": true,
+				"width": true
+			}
+		},
+		"unitone": {
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
+	"style": "file:./style-index.css",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php"
+}

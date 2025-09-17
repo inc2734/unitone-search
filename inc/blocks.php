@@ -6,12 +6,124 @@
  */
 
 /**
+ * Register post types.
+ */
+function unitone_search_register_post_types() {
+	register_post_meta(
+		'unitone-search',
+		'unitone_search_related_post_type',
+		array(
+			'show_in_rest'      => true,
+			'type'              => 'string',
+			'single'            => true,
+			'sanitize_callback' => 'sanitize_text_field',
+			'auth_callback'     => function () {
+				return current_user_can( 'manage_options' );
+			},
+		)
+	);
+
+	register_post_type(
+		'unitone-search',
+		array(
+			'label'        => __( 'unitone Search', 'unitone-search' ),
+			'public'       => false,
+			'show_ui'      => true,
+			'show_in_rest' => true,
+			'capabilities' => array(
+				'edit_post'          => 'manage_options',
+				'read_post'          => 'manage_options',
+				'delete_post'        => 'manage_options',
+				'edit_posts'         => 'manage_options',
+				'delete_posts'       => 'manage_options',
+				'publish_posts'      => 'manage_options',
+				'read_private_posts' => 'manage_options',
+			),
+			'supports'     => array( 'title', 'editor', 'custom-fields' ),
+			'template'     => array(
+				array(
+					'unitone-search/search-box',
+					array(
+						'relatedPostType' => 'post',
+						'style'           => array(
+							'border' => array(
+								'width' => '1px',
+							),
+						),
+						'borderColor'     => 'var(--wp--preset--color--unitone-light-gray)',
+						'backgroundColor' => 'var(--wp--preset--color--unitone-bright-gray)',
+						'lock'            => array(
+							'move'   => true,
+							'remove' => true,
+						),
+					),
+					array(
+						array(
+							'unitone/stack',
+							array(),
+							array(
+								array(
+									'unitone-search/keyword-search',
+								),
+							),
+						),
+						array(
+							'unitone/stack',
+							array(),
+							array(
+								array(
+									'unitone-search/taxonomy-search',
+									array(
+										'postType' => 'post',
+										'taxonomy' => 'category',
+									),
+								),
+							),
+						),
+						array(
+							'unitone/stack',
+							array(),
+							array(
+								array(
+									'unitone-search/taxonomy-search',
+									array(
+										'postType' => 'post',
+										'taxonomy' => 'post_tag',
+									),
+								),
+							),
+						),
+					),
+				),
+			),
+		)
+	);
+}
+add_action( 'init', 'unitone_search_register_post_types' );
+
+/**
+ * Register block categories.
+ *
+ * @param array $categories array Array of block categories.
+ * @return array
+ */
+function unitone_search_register_block_categories( $categories ) {
+	$categories[] = array(
+		'slug'  => 'unitone-search',
+		'title' => __( '[unitone] Search', 'unitone-search' ),
+	);
+
+	return $categories;
+}
+add_filter( 'block_categories_all', 'unitone_search_register_block_categories' );
+
+/**
  * Register blocks.
  */
 function unitone_search_register_blocks() {
 	wp_register_block_types_from_metadata_collection(
-		UNITONE_SEARCH_PATH . '/build',
-		UNITONE_SEARCH_PATH . '/build/blocks-manifest.php'
+		UNITONE_SEARCH_PATH . '/dist/blocks',
+		UNITONE_SEARCH_PATH . '/dist/blocks-manifest.php'
 	);
 
 	foreach ( \WP_Block_Type_Registry::get_instance()->get_all_registered() as $block_type => $block ) {

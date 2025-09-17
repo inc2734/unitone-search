@@ -1,0 +1,36 @@
+:where(.editor-styles-wrapper) .unitone-search-search-box {
+	.unitone-search-form-control,
+	.unitone-search-checkbox__control,
+	.unitone-search-radio__control {
+		&:disabled {
+			background-color: white;
+			color: inherit;
+			opacity: 1;
+
+			&:checked::before {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+:where(.editor-styles-wrapper) .unitone-search-search-box {
+	.unitone-search-radio__control:disabled:checked {
+		background-color: #3a87fd;
+		border-color: #3a87fd;
+
+		&::before {
+			background-color: white;
+			width: 6px;
+			height: 6px;
+		}
+	}
+}
+
+:where(.editor-styles-wrapper) .unitone-search-search-box {
+	.unitone-search-select__control {
+		background-color: transparent;
+		color: inherit;
+		opacity: 1;
+	}
+}

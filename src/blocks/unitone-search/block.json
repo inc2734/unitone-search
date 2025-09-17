@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "unitone-search",
+	"name": "unitone-search/unitone-search",
+	"title": "unitone Search",
+	"category": "unitone-search",
+	"attributes": {
+		"formId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

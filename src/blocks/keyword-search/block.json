@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "unitone-search",
+	"name": "unitone-search/keyword-search",
+	"title": "Keyword Search",
+	"category": "unitone-search",
+	"ancestor": [ "unitone-search/search-box" ],
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": null
+		},
+		"placeholder": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"selectors": {
+		"root": ".unitone-search-keyword-search"
+	},
+	"supports": {
+		"className": false,
+		"anchor": true,
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
