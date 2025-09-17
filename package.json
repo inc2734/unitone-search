@@ -1,0 +1,58 @@
+{
+	"engines": {
+		"node": ">=20.10.0",
+		"npm": ">=10.2.3"
+	},
+	"volta": {
+		"node": "20.11.1"
+	},
+	"devDependencies": {
+		"@inc2734/contents-outline": "^0.1.7",
+		"@wordpress/env": "^10.30.0",
+		"@wordpress/scripts": "^30.23.0",
+		"autoprefixer": "^10.4.21",
+		"classnames": "^2.5.1",
+		"cpy-cli": "^6.0.0",
+		"cssnano": "^7.1.1",
+		"lodash": "^4.17.21",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^8.5.6",
+		"postcss-cli": "^11.0.1",
+		"postcss-import": "^16.1.1",
+		"prettier": "npm:wp-prettier@3.0.3",
+		"rimraf": "^6.0.1"
+	},
+	"scripts": {
+		"export:wp-content:themes": "npm run cli cp -- -r ../../themes .export/wp-content",
+		"export:wp-content:uploads": "npm run cli cp -- -r ../../uploads .export/wp-content",
+		"export:wp-content": "npm run cli rm -- -rf .export/wp-content && mkdir -p .export/wp-content/uploads && run-p export:wp-content:*",
+		"export:db": "mkdir -p .export/sql && npm run wp db -- export .export/sql/local.sql",
+		"export": "run-p export:*",
+		"import:wp-content:themes": "npm run cli cp -- -r .export/wp-content/themes ../../",
+		"import:wp-content:uploads": "npm run cli cp -- -r .export/wp-content/uploads ../../",
+		"import:wp-content": "run-p import:wp-content:*",
+		"import:db": "npm run wp db -- import .export/sql/local.sql",
+		"import": "run-p import:*",
+		"wp-env": "wp-env",
+		"start": "wp-env start && open http://localhost:8888",
+		"stop": "npm run export && wp-env stop",
+		"cli": "wp-env run --env-cwd=wp-content/plugins/unitone-search cli",
+		"wp": "wp-env run --env-cwd=wp-content/plugins/unitone-search cli wp",
+		"composer": "wp-env run --env-cwd=\"wp-content/plugins/unitone-search\" cli composer",
+		"blocks:format": "wp-scripts format src/blocks",
+		"blocks:build": "rimraf dist/blocks && wp-scripts build --output-path=dist --blocks-manifest",
+		"blocks:php": "cpy 'src/blocks/**/*.php' 'dist/blocks'",
+		"blocks": "run-s blocks:format blocks:build blocks:php",
+		"build": "run-p blocks",
+		"test:lint:blocks": "wp-scripts lint-js src/blocks",
+		"test:lint:php": "wp-env start && npm run composer lint",
+		"test:lint": "run-s test:lint:*",
+		"test": "run-s test:*",
+		"zip:pack": "rimraf unitone unitone-search.zip && rsync -a --exclude='.*' --exclude='*.log' --exclude='error_log' --exclude='todo.md' --exclude='*.config.js' --exclude='/bin' --exclude='/node_modules' --exclude='/vendor' --exclude='/tests' --exclude='/src' --exclude='/unitone-search.zip' ./ unitone-search",
+		"zip:archive": "zip -9 -qmr unitone-search.zip unitone-search",
+		"zip": "npm run zip:pack && wp-env start && npm run composer install -- --no-dev -d unitone-search && npm run zip:archive",
+		"make-pot": "npm run wp i18n -- make-pot . ./languages/unitone-search.pot --exclude=.*,src",
+		"make-json": "rimraf languages/*.json && wp-env start && npm run wp i18n -- make-json ./languages/unitone-search-ja.po --no-purge",
+		"make-php": "npm run cli php -- ./bin/l10n.php"
+	}
+}

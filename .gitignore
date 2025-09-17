@@ -1,0 +1,9 @@
+node_modules
+vendor
+*.DS_Store
+/.export/*
+error_log
+dist
+/unitone-search
+/unitone-search.zip
+.wp-env.override.json
