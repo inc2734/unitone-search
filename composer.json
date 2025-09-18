@@ -1,4 +1,5 @@
 {
+	"name": "inc2734/unitone-search",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"authors": [
@@ -25,8 +26,13 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"UnitoneSearch\\": ""
-		}
+			"UnitoneSearch\\": "./"
+		},
+		"exclude-from-classmap": [
+			"unitone-search.php",
+			"node_modules/",
+			"tests/"
+		]
 	},
 	"config": {
 		"allow-plugins": {
