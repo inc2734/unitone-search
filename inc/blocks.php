@@ -113,9 +113,9 @@ function unitone_search_register_blocks() {
 	);
 
 	foreach ( \WP_Block_Type_Registry::get_instance()->get_all_registered() as $block_type => $block ) {
-		if ( 0 === strpos( $block_type, 'unitone--search/' ) ) {
+		if ( 0 === strpos( $block_type, 'unitone-search/' ) ) {
 			$handle = str_replace( '/', '-', $block_type ) . '-editor-script';
-			wp_set_script_translations( $handle, 'unitone-search', UNITONE_MONKEY_SEARCH_PATH . '/languages' );
+			wp_set_script_translations( $handle, 'unitone-search', UNITONE_SEARCH_PATH . '/languages' );
 		}
 	}
 }

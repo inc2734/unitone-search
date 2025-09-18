@@ -125,4 +125,3 @@ function unitone_search_activate() {
 	register_uninstall_hook( __FILE__, '\UnitoneSearch\unitone_search_uninstall' );
 }
 register_activation_hook( __FILE__, '\UnitoneSearch\unitone_search_activate' );
-
