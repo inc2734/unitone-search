@@ -90,6 +90,10 @@ export default function ( { attributes, setAttributes, context } ) {
 		}
 	}, [ controlType, type ] );
 
+	// console.log( '-----' );
+	// console.log( controlType );
+	// console.log( finalControlType );
+
 	// Set default options
 	useEffect( () => {
 		if (
@@ -295,15 +299,13 @@ export default function ( { attributes, setAttributes, context } ) {
 
 					<ToolsPanelItem
 						hasValue={ () =>
-							controlType !==
-							metadata.attributes.controlType.default
+							controlType !== metadata.attributes.options.default
 						}
 						isShownByDefault
-						label={ __( 'Type', 'unitone-search' ) }
+						label={ __( 'options', 'unitone-search' ) }
 						onDeselect={ () =>
 							setAttributes( {
-								controlType:
-									metadata.attributes.controlType.default,
+								options: metadata.attributes.options.default,
 							} )
 						}
 					>
