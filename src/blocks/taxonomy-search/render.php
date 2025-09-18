@@ -66,7 +66,7 @@ if ( ! $terms ) {
 }
 
 $terms = apply_filters(
-	'unitone_taxonomy_search_terms',
+	'unitone_search_taxonomy_search_terms',
 	$terms,
 	array(
 		'taxonomy'  => $wp_taxonomy->name,
