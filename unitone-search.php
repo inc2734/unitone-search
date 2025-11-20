@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin name: unitone Search
- * Version: 1.0.1
- * Tested up to: 6.8
+ * Version: 1.0.2
+ * Tested up to: 6.9-RC2
  * Requires at least: 6.8
  * Requires PHP: 7.4
  * Description: A search filter plugin for the WordPress theme unitone.
