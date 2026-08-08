@@ -18,7 +18,7 @@ export function optionsToJsonArray( text ) {
 			const optionMap = ( () => {
 				try {
 					return JSON.parse( `{ ${ element } }` );
-				} catch ( error ) {
+				} catch {
 					return { [ element ]: element };
 				}
 			} )();
