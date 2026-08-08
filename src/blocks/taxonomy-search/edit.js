@@ -104,7 +104,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Control Type', 'unitone-search' ) }
 							value={ controlType }
@@ -144,7 +143,6 @@ export default function ( { attributes, setAttributes, context } ) {
 							}
 						>
 							<SelectControl
-								__next40pxDefaultSize
 								__nextHasNoMarginBottom
 								label={ __( 'Flow', 'unitone-search' ) }
 								value={ flow }
@@ -191,7 +189,6 @@ export default function ( { attributes, setAttributes, context } ) {
 							}
 						>
 							<UnitControl
-								__next40pxDefaultSize
 								label={ __(
 									'Item Minimum Width',
 									'unitone-search'
@@ -221,7 +218,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Taxonomy', 'unitone-search' ) }
 							value={ taxonomy }

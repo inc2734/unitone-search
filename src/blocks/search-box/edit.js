@@ -54,7 +54,6 @@ export default function ( { attributes, setAttributes, clientId } ) {
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings' ) }>
 					<SelectControl
-						__next40pxDefaultSize
 						__nextHasNoMarginBottom
 						label={ __(
 							'Post Types to Search For',

@@ -33,7 +33,6 @@ export default function ( { attributes, setAttributes, isSelected } ) {
 					label={ __( 'Select a search box', 'unitone-search' ) }
 				>
 					<SelectControl
-						__next40pxDefaultSize
 						__nextHasNoMarginBottom
 						value={ formId }
 						options={ [

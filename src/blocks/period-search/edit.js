@@ -75,7 +75,6 @@ export default function ( { attributes, setAttributes } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Type', 'unitone-search' ) }
 							value={ controlType }
@@ -111,7 +110,6 @@ export default function ( { attributes, setAttributes } ) {
 					>
 						<div className="unitone-search-date-control">
 							<InputControl
-								__next40pxDefaultSize
 								label={ __( 'Minimum Date', 'unitone-search' ) }
 								type={ controlType }
 								pattern={ pattern }
@@ -139,7 +137,6 @@ export default function ( { attributes, setAttributes } ) {
 					>
 						<div className="unitone-search-date-control">
 							<InputControl
-								__next40pxDefaultSize
 								label={ __( 'Maximum Date', 'unitone-search' ) }
 								type={ controlType }
 								pattern={ pattern }

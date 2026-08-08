@@ -145,7 +145,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Key', 'unitone-search' ) }
 							value={ key }
@@ -187,7 +186,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Control Type', 'unitone-search' ) }
 							help={ __(
@@ -235,7 +233,6 @@ export default function ( { attributes, setAttributes, context } ) {
 							}
 						>
 							<SelectControl
-								__next40pxDefaultSize
 								__nextHasNoMarginBottom
 								label={ __( 'Flow', 'unitone-search' ) }
 								value={ flow }
@@ -282,7 +279,6 @@ export default function ( { attributes, setAttributes, context } ) {
 							}
 						>
 							<UnitControl
-								__next40pxDefaultSize
 								label={ __(
 									'Item Minimum Width',
 									'unitone-search'
@@ -346,7 +342,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Type', 'unitone-search' ) }
 							value={ type }
@@ -393,7 +388,6 @@ export default function ( { attributes, setAttributes, context } ) {
 						}
 					>
 						<SelectControl
-							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 							label={ __( 'Compare', 'unitone-search' ) }
 							value={ compare }
