@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin name: unitone Search
- * Version: 1.0.3
+ * Version: 2.0.0
  * Tested up to: 7.1
- * Requires at least: 7.1-RC1
+ * Requires at least: 7.1
  * Requires PHP: 7.4
  * Description: A search filter plugin for the WordPress theme unitone.
  * Author: Takashi Kitajima

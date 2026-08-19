@@ -55,7 +55,7 @@
 		"test:lint:php": "npm run test:php:lint",
 		"test:lint": "run-s test:lint:*",
 		"test": "run-s test:*",
-		"zip:pack": "rimraf unitone unitone-search.zip && rsync -a --exclude='.*' --exclude='*.log' --exclude='error_log' --exclude='todo.md' --exclude='*.config.js' --exclude='/bin' --exclude='/node_modules' --exclude='/vendor' --exclude='/tests' --exclude='/src' --exclude='/unitone-search.zip' ./ unitone-search",
+		"zip:pack": "rimraf unitone unitone-search.zip && rsync -a --exclude='.*' --exclude='*.log' --exclude='error_log' --exclude='todo.md' --exclude='*.config.js' --exclude='/eslint.config.*' --exclude='/bin' --exclude='/node_modules' --exclude='/vendor' --exclude='/tests' --exclude='/src' --exclude='/unitone-search.zip' ./ unitone-search",
 		"zip:archive": "zip -9 -qmr unitone-search.zip unitone-search",
 		"zip": "npm run zip:pack && wp-env start && npm run composer install -- --no-dev -d unitone-search && npm run zip:archive",
 		"make-pot": "npm run wp i18n -- make-pot . ./languages/unitone-search.pot --exclude=.*,src",

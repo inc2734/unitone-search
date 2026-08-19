@@ -1,5 +1,5 @@
 {
-	"core": "WordPress/WordPress#d3a8d859c86391fa57dac48ea404ed44b2a2490b",
+	"core": null,
 	"port": 8889,
 	"testsEnvironment": false,
 	"plugins": [ "." ],
